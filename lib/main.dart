@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fruits_hub_dashboard/feature/dashboard/presentation/views/dashboard_view.dart';
 
 import 'core/helper/func/on_generate_routes.dart';
 import 'firebase_options.dart';
@@ -19,6 +20,7 @@ class FruitsHubDashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: DashboardView.routeName,
       onGenerateRoute: onGenerateRoute,
     );
   }
