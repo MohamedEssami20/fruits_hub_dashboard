@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_text_form_filed.dart';
+import 'package:fruits_hub_dashboard/core/utils/widgets/is_featured_item.dart';
 import 'package:fruits_hub_dashboard/feature/add_product/presentation/views/widgets/image_field.dart';
 
 class AddProductViewBody extends StatefulWidget {
@@ -19,7 +20,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
       child: Form(
         key: _formKey,
         autovalidateMode: autovalidateMode,
-        child:  Column(
+        child: Column(
           children: [
             const SizedBox(height: 40),
             const CustomTextFormFiled(
@@ -46,7 +47,11 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               maxLines: 5,
             ),
             const SizedBox(height: 20),
-            ImageField(onChanged: (value){},),
+            IsFeaturedItem(onCahanged: (val) {}),
+            const SizedBox(height: 20),
+            ImageField(
+              onChanged: (value) {},
+            ),
           ],
         ),
       ),
