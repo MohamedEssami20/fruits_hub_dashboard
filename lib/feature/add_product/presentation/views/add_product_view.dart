@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/repos/add_product_repo.dart';
 import 'package:fruits_hub_dashboard/core/repos/images_repo.dart';
 import 'package:fruits_hub_dashboard/core/services/get_it_service.dart';
-import 'package:fruits_hub_dashboard/feature/add_product/presentation/views/widgets/add_product_view_body.dart';
+import 'package:fruits_hub_dashboard/feature/add_product/presentation/views/widgets/add_product_view_body_bloc_consumer.dart';
 import '../../../../core/utils/widgets/build_appbar.dart';
 import '../manager/cubit/add_product_cubit.dart';
 
@@ -19,7 +19,9 @@ class AddProductView extends StatelessWidget {
         return AddProductCubit(
           addProductRepo:GetItService().getIt<AddProductRepo>(),
           imagesRepo:GetItService().getIt<ImagesRepo>(),);
-      } , child: const AddProductViewBody()),
+      } , child: const AddProductViewBodyBlocConsumer()),
     );
   }
 }
+
+
