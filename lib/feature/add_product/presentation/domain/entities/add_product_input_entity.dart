@@ -3,7 +3,7 @@ import 'dart:io';
 class AddProductInputEntity {
   final String name;
   final String code;
-  final String price;
+  final num price;
   final File image;
   final bool isFeatured;
   final String description;

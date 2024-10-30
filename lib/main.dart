@@ -1,15 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_dashboard/core/services/custom_bloc_observer.dart';
+import 'package:fruits_hub_dashboard/core/services/get_it_service.dart';
 import 'package:fruits_hub_dashboard/feature/dashboard/presentation/views/dashboard_view.dart';
 
 import 'core/helper/func/on_generate_routes.dart';
 import 'firebase_options.dart';
 
-void main()async {
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  GetItService().setupGetit();
+  Bloc.observer = CustomBlocObserver();
   runApp(const FruitsHubDashBoard());
 }
 
@@ -25,5 +30,3 @@ class FruitsHubDashBoard extends StatelessWidget {
     );
   }
 }
-
-

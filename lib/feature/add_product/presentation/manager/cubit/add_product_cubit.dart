@@ -10,7 +10,7 @@ import '../../../../../core/errors/failure.dart';
 part 'add_product_state.dart';
 
 class AddProductCubit extends Cubit<AddProductState> {
-  AddProductCubit(this.imagesRepo, this.addProductRepo)
+  AddProductCubit({required this.imagesRepo, required this.addProductRepo})
       : super(AddProductInitial());
   final ImagesRepo imagesRepo;
   final AddProductRepo addProductRepo;

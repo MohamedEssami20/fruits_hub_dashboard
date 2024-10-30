@@ -7,14 +7,14 @@ import 'package:fruits_hub_dashboard/core/repos/images_repo.dart';
 import 'package:fruits_hub_dashboard/core/services/storae_service.dart';
 
 class ImagesRepoImpl implements ImagesRepo {
-  final StoraeService storaeService;
+  final StorageService storageService;
 
-  ImagesRepoImpl({required this.storaeService});
+  ImagesRepoImpl({required this.storageService});
   @override
   Future<Either<Failure, String>> uploadImage(File image) async {
     try {
       String imageUrl =
-          await storaeService.uploadImage(image, BackendEndPoint.imagePath);
+          await storageService.uploadImage(image, BackendEndPoint.imagePath);
       return right(imageUrl);
     } catch (e) {
       return left(

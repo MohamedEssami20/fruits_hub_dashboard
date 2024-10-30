@@ -5,7 +5,7 @@ import 'package:fruits_hub_dashboard/feature/add_product/presentation/domain/ent
 class AddProductInputModel{
   final String name;
   final String code;
-  final String price;
+  final num price;
   final File image;
   final bool isFeatured;
   final String description;

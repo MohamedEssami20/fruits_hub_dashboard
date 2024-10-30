@@ -1,10 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_text_form_filed.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/is_featured_item.dart';
+import 'package:fruits_hub_dashboard/feature/add_product/presentation/manager/cubit/add_product_cubit.dart';
 import 'package:fruits_hub_dashboard/feature/add_product/presentation/views/widgets/image_field.dart';
+
+import '../../domain/entities/add_product_input_entity.dart';
 
 class AddProductViewBody extends StatefulWidget {
   const AddProductViewBody({super.key});
@@ -74,12 +78,23 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
             ),
             const SizedBox(height: 20),
             CustomButton(
-              onPressed: () {
+              onPressed: () async{
                 if (imageFile != null) {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     autovalidateMode = AutovalidateMode.disabled;
-                    setState(() {});
+                      setState(() {});
+                     AddProductInputEntity addProductInputEntity =
+                        AddProductInputEntity(
+                      name: name,
+                      price: price,
+                      code: code,
+                      description: description,
+                      image: imageFile!,
+                      isFeatured: isFeatured,
+                    );
+                    await context.read<AddProductCubit>().addProduct(addProductInputEntity: addProductInputEntity);
+
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
