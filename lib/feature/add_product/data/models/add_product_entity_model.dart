@@ -17,8 +17,9 @@ class AddProductInputModel {
   final num avgRating;
   final num ratingCount;
   final int unitAmount;
+  final int sellingCount;
   final List<ReviewsModel> reviews;
-  AddProductInputModel(
+  AddProductInputModel( 
       {required this.name,
       required this.code,
       required this.price,
@@ -32,6 +33,7 @@ class AddProductInputModel {
       required this.ratingCount,
       required this.unitAmount,
       required this.reviews,
+      this.sellingCount=0,
       this.iamgeUrl});
 
   factory AddProductInputModel.fromProductEntity(
@@ -74,6 +76,7 @@ class AddProductInputModel {
             (e) => e.toJson(),
           )
           .toList(),
+      "sellingCount":sellingCount,
     };
   }
 }
