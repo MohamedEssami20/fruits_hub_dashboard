@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SupabaseStorageService.initSupabaseService();
+  await SupabaseStorageService.createBucket("fruits_images");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

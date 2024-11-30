@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -17,6 +18,7 @@ class ImagesRepoImpl implements ImagesRepo {
           await storageService.uploadImage(image, BackendEndPoint.imagePath);
       return right(imageUrl);
     } catch (e) {
+      log("image Error= $e");
       return left(
         ServerFailure(errorMessage: "Failed to upload image"),
       );

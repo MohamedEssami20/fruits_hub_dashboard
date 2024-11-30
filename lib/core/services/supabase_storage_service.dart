@@ -8,6 +8,20 @@ import '../utils/backend_endpoints.dart';
 class SupabaseStorageService implements StorageService {
   static late Supabase _supabase;
 
+  static Future<void> createBucket(String bucketName) async {
+    List<Bucket> bucketList = await _supabase.client.storage.listBuckets();
+    bool isbucketExits = false;
+    for (var bucket in bucketList) {
+      if(bucket.id==bucketName){
+        isbucketExits = true;
+        break;
+      }
+    }
+    if(!isbucketExits){
+      await _supabase.client.storage.createBucket(bucketName);
+    }
+  }
+
   static Future<void> initSupabaseService() async {
     _supabase = await Supabase.initialize(
       url: BackendEndpoints.supabaseProjectUrl,
