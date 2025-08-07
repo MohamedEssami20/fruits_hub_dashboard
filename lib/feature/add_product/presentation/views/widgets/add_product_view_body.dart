@@ -125,7 +125,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                             date: DateTime.now().toIso8601String(),
                             image:
                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-                            reviewDescription: "this is a very good product")
+                            reviewDescription: "this is a very good product"),
                       ],
                       name: name,
                       price: price,
@@ -137,6 +137,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       unitAmount: unitAmount,
                       expeireationMonths: expeireationMonths,
                       numberOfCalories: numberOfCalories,
+                      
                     );
                     await context.read<AddProductCubit>().addProduct(
                         addProductInputEntity: addProductInputEntity);
