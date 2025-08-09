@@ -21,11 +21,12 @@ class OrdersReposImpl implements OrdersRepo {
         path: BackendEndPoint.getOrdersPath,
       );
 
-      List<OrderEntity> orders =
-          data.map((e) => OrderModel.fromJson(e).toEntity()).toList();
+      List<OrderEntity> orders = (data as List<dynamic>)
+          .map<OrderEntity>((e) => OrderModel.fromJson(e).toEntity())
+          .toList();
       return right(orders);
-    } on Exception {
-      return left(ServerFailure(errorMessage: "Failed to get orders"));
+    } on Exception catch (e) {
+      return left(ServerFailure(errorMessage: "Failed to get orders= $e"));
     }
   }
 }

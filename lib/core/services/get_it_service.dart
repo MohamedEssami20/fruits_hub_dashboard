@@ -26,11 +26,11 @@ class GetItService {
       AddProductRepoImpl(
         dataBaseService: getIt.get<DataBaseService>(),
       ),
-    );
+    ); 
 
     getIt.registerSingleton<OrdersRepo>(
       OrdersReposImpl(
-        dataBaseService: getIt.get<FirestoreService>(),
+        dataBaseService: getIt.get<DataBaseService>(),
       ),
     );
   }
