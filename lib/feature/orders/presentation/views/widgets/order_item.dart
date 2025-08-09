@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../data/models/order_model.dart';
+import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
 
 class OrderItem extends StatelessWidget {
-  final OrderModel order;
+  final OrderEntity order;
 
   const OrderItem({super.key, required this.order});
 
@@ -45,16 +45,16 @@ class OrderItem extends StatelessWidget {
 
             // بيانات المشتري
             Text(
-              order.orderAddressDetailsModel.fullName ?? "Unknown User",
+              order.orderAddressDetailsEntity.fullName ?? "Unknown User",
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
-            Text(order.orderAddressDetailsModel.address ?? "No Address"),
-            Text(order.orderAddressDetailsModel.phone ?? "No Phone"),
+            Text(order.orderAddressDetailsEntity.address ?? "No Address"),
+            Text(order.orderAddressDetailsEntity.phone ?? "No Phone"),
             const Divider(height: 20),
 
             // المنتجات
-            ...order.orderProductModel.map((product) {
+            ...order.orderProductEntity.map((product) {
               return ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: ClipRRect(

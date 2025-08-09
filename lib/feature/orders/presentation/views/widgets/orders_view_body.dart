@@ -17,10 +17,10 @@ class OrdersViewBody extends StatelessWidget {
           Expanded(
             child: OrderItemListView(
               orders: [
-                getDummyOrderModel(),
-                getDummyOrderModel(),
-                getDummyOrderModel(),
-                getDummyOrderModel(),
+                getDummyOrderEntity(),
+                getDummyOrderEntity(),
+                getDummyOrderEntity(),
+                getDummyOrderEntity(),
               ],
             ),
           ),

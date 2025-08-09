@@ -1,3 +1,5 @@
+import '../../domain/entities/order_address_details_entity.dart';
+
 class OrderAddressDetailsModel {
   String? fullName;
   String? email;
@@ -37,4 +39,13 @@ class OrderAddressDetailsModel {
       "floorName": floorName
     };
   }
+
+  OrderAddressDetailsEntity toEntity() => OrderAddressDetailsEntity(
+        fullName: fullName,
+        email: email,
+        address: address,
+        phone: phone,
+        city: city,
+        floorName: floorName,
+      );
 }

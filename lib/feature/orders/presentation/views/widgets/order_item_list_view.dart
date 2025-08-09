@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_hub_dashboard/feature/orders/data/models/order_model.dart';
+import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
 
 import 'order_item.dart';
 
 class OrderItemListView extends StatelessWidget {
   const OrderItemListView({super.key, required this.orders});
-  final List<OrderModel> orders;
+  final List<OrderEntity> orders;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

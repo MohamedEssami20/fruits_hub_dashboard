@@ -1,13 +1,13 @@
-import '../../feature/orders/data/models/order_address_details_model.dart';
-import '../../feature/orders/data/models/order_model.dart';
-import '../../feature/orders/data/models/order_product_model.dart';
+import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_address_details_entity.dart';
+import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
+import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_product_entity.dart';
 
-OrderModel getDummyOrderModel() {
-  return OrderModel(
+OrderEntity getDummyOrderEntity() {
+  return OrderEntity(
     userId: "user_123456",
     totalPrice: "450.00",
     paymentMethod: "cash",
-    orderAddressDetailsModel: OrderAddressDetailsModel(
+    orderAddressDetailsEntity: OrderAddressDetailsEntity(
       fullName: "محمد أحمد",
       email: "mohamed@example.com",
       address: "شارع التحرير، عمارة 5",
@@ -15,20 +15,20 @@ OrderModel getDummyOrderModel() {
       city: "القاهرة",
       floorName: "الدور الثالث",
     ),
-    orderProductModel: [
-      OrderProductModel(
+    orderProductEntity: [
+      OrderProductEntity(
         name: "قلم حبر",
         imageUrl: "https://via.placeholder.com/150",
         price: 25.0,
         quantity: 2,
       ),
-      OrderProductModel(
+      OrderProductEntity(
         name: "دفتر ملاحظات",
         imageUrl: "https://via.placeholder.com/150",
         price: 50.0,
         quantity: 3,
       ),
-      OrderProductModel(
+      OrderProductEntity(
         name: "آلة حاسبة",
         imageUrl: "https://via.placeholder.com/150",
         price: 200.0,
