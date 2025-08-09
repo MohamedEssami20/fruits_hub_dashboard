@@ -74,7 +74,9 @@ class OrderItem extends StatelessWidget {
                 trailing: Text(
                   "${(product.price * product.quantity).toStringAsFixed(2)} EGP",
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.green),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
                 ),
               );
             }),
