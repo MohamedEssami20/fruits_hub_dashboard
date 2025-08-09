@@ -16,11 +16,32 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Future<Map<String, dynamic>> getData(
-      {required String path, required String documentId}) async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await firebaseFirestore.collection(path).doc(documentId).get();
-    return documentSnapshot.data() as Map<String, dynamic>;
+  Future<dynamic> getData(
+      {required String path,
+      String? documentId,
+      Map<String, dynamic>? query}) async {
+    if (documentId != null) {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await firebaseFirestore.collection(path).doc(documentId).get();
+      return documentSnapshot.data();
+    } else {
+      Query<Map<String, dynamic>> documentSnapshot =
+          firebaseFirestore.collection(path);
+      if (query != null) {
+        if (query['orderBy'] != null) {
+          String orderBy = query['orderBy'];
+          bool isAscending = query['descending'];
+          documentSnapshot =
+              documentSnapshot.orderBy(orderBy, descending: isAscending);
+        }
+        if (query['limit'] != null) {
+          int limit = query['limit'];
+          documentSnapshot = documentSnapshot.limit(limit);
+        }
+      }
+      QuerySnapshot<Map<String, dynamic>> result = await documentSnapshot.get();
+      return result.docs.map((e) => e.data()).toList();
+    }
   }
 
   @override
@@ -31,3 +52,4 @@ class FirestoreService implements DataBaseService {
     return documentSnapshot.exists;
   }
 }
+
