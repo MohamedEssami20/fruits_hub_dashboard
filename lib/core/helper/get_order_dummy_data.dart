@@ -1,9 +1,11 @@
+import 'package:fruits_hub_dashboard/core/enums/order_status.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_address_details_entity.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_product_entity.dart';
 
 OrderEntity getDummyOrderEntity() {
   return OrderEntity(
+    status:OrderStatus.accepted ,
     userId: "user_123456",
     totalPrice: "450.00",
     paymentMethod: "cash",

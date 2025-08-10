@@ -1,3 +1,6 @@
+
+import 'package:fruits_hub_dashboard/core/enums/order_status.dart';
+
 import 'order_address_details_entity.dart';
 import 'order_product_entity.dart';
 
@@ -7,13 +10,15 @@ class OrderEntity {
   final OrderAddressDetailsEntity orderAddressDetailsEntity;
   final List<OrderProductEntity> orderProductEntity;
   final String paymentMethod;
-  String? status = "pending";
-  String? date;
+  final OrderStatus status;
+  final String? date;
 
   OrderEntity(
       {required this.userId,
       required this.totalPrice,
       required this.orderAddressDetailsEntity,
       required this.orderProductEntity,
-      required this.paymentMethod});
+      required this.paymentMethod,
+      required this.status,
+      this.date});
 }

@@ -14,5 +14,9 @@ class OrderAddressDetailsEntity {
     this.city,
     this.floorName,
   });
-
+  
+  
+  String get fullAddress {
+    return "$address, $city, $floorName";
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
 
+import '../../../../../core/enums/order_status.dart';
+
 class OrderItem extends StatelessWidget {
   final OrderEntity order;
 
@@ -23,17 +25,11 @@ class OrderItem extends StatelessWidget {
               children: [
                 Chip(
                   label: Text(
-                    order.status ?? "Pending",
-                    style: TextStyle(
-                      color: order.status == "completed"
-                          ? Colors.green
-                          : Colors.orange,
-                    ),
+                    _getOrderStatus(order.status),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  backgroundColor: (order.status == "completed"
-                          ? Colors.green
-                          : Colors.orange)
-                      .withAlpha(1),
+                  backgroundColor:
+                      _getOrderStatusColor(order.status),
                 ),
                 Text(
                   order.date != null ? _formatDate("${order.date}") : "No date",
@@ -49,8 +45,10 @@ class OrderItem extends StatelessWidget {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
-            Text(order.orderAddressDetailsEntity.address ?? "No Address"),
+            Text(order.orderAddressDetailsEntity.fullAddress),
             Text(order.orderAddressDetailsEntity.phone ?? "No Phone"),
+            Text(order.orderAddressDetailsEntity.email ?? "No email"),
+
             const Divider(height: 20),
 
             // المنتجات
@@ -110,6 +108,32 @@ class OrderItem extends StatelessWidget {
       return "${dateTime.day}/${dateTime.month}/${dateTime.year}";
     } catch (e) {
       return dateString;
+    }
+  }
+
+  String _getOrderStatus(OrderStatus status) {
+    switch (status) {
+      case OrderStatus.pending:
+        return 'Pending';
+      case OrderStatus.accepted:
+        return 'accepted';
+      case OrderStatus.delivered:
+        return 'Delivered';
+      case OrderStatus.cancelled:
+        return 'Cancelled';
+    }
+  }
+
+  Color _getOrderStatusColor(OrderStatus status) {
+    switch (status) {
+      case OrderStatus.pending:
+        return Colors.orange;
+      case OrderStatus.accepted:
+        return Colors.green;
+      case OrderStatus.delivered:
+        return Colors.green;
+      case OrderStatus.cancelled:
+        return Colors.red;
     }
   }
 }

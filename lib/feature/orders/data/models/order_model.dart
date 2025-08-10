@@ -1,3 +1,4 @@
+import '../../../../core/enums/order_status.dart';
 import '../../domain/entities/order_entity.dart';
 import 'order_address_details_model.dart';
 import 'order_product_model.dart';
@@ -8,29 +9,36 @@ class OrderModel {
   final OrderAddressDetailsModel orderAddressDetailsModel;
   final List<OrderProductModel> orderProductModel;
   final String paymentMethod;
-  String? status = "pending";
-  String?date;
+  final String? status;
+  final String? date;
 
-  OrderModel(
-      {required this.userId,
-      required this.totalPrice,
-      required this.orderAddressDetailsModel,
-      required this.orderProductModel,
-      required this.paymentMethod});
+  OrderModel({
+    required this.userId,
+    required this.totalPrice,
+    required this.orderAddressDetailsModel,
+    required this.orderProductModel,
+    required this.paymentMethod,
+    this.status,
+    this.date,
+  });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
-      userId: json['userId'],
-      totalPrice: json['totalPrice'],
-      orderAddressDetailsModel:
-          OrderAddressDetailsModel.fromJson(json['orderAddressDetailsModel']),
-      orderProductModel: List<OrderProductModel>.from(
-          json['orderProductModel'].map((x) => OrderProductModel.fromJson(x))),
-      paymentMethod: json['paymentMethod']);
+        userId: json['userId'],
+        totalPrice: json['totalPrice'],
+        orderAddressDetailsModel:
+            OrderAddressDetailsModel.fromJson(json['orderAddressDetailsModel']),
+        orderProductModel: List<OrderProductModel>.from(
+            json['orderProductModel']
+                .map((x) => OrderProductModel.fromJson(x))),
+        paymentMethod: json['paymentMethod'],
+        status: json['status'] ?? "pending",
+        date: json['date'],
+      );
 
   // create to json method
   Map<String, dynamic> toJson() => {
         'userId': userId,
-        'status': "pending",
+        'status': status ?? "pending",
         'date': DateTime.now().toString(),
         'totalPrice': totalPrice,
         'orderAddressDetailsModel': orderAddressDetailsModel.toJson(),
@@ -45,5 +53,16 @@ class OrderModel {
         orderAddressDetailsEntity: orderAddressDetailsModel.toEntity(),
         orderProductEntity: orderProductModel.map((e) => e.toEntity()).toList(),
         paymentMethod: paymentMethod,
+        status: getOrderStatus(),
+        date: date,
       );
+
+  OrderStatus getOrderStatus() {
+    return status == null
+        ? OrderStatus.pending
+        : OrderStatus.values.firstWhere((element) {
+            var orderStatus = element.name.toString();
+            return orderStatus == (status ?? "pending");
+          });
+  }
 }
