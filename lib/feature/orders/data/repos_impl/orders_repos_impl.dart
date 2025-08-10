@@ -15,7 +15,7 @@ class OrdersReposImpl implements OrdersRepo {
   }) : _dataBaseService = dataBaseService;
 
   @override
-  Future<Either<Failure, List<OrderEntity>>> getOrders() async {
+  Stream<Either<Failure, List<OrderEntity>>> getOrders() async* {
     try {
       final data = await _dataBaseService.getData(
         path: BackendEndPoint.getOrdersPath,
@@ -24,9 +24,9 @@ class OrdersReposImpl implements OrdersRepo {
       List<OrderEntity> orders = (data as List<dynamic>)
           .map<OrderEntity>((e) => OrderModel.fromJson(e).toEntity())
           .toList();
-      return right(orders);
+      yield right(orders);
     } on Exception catch (e) {
-      return left(ServerFailure(errorMessage: "Failed to get orders= $e"));
+      yield left(ServerFailure(errorMessage: "Failed to get orders= $e"));
     }
   }
 }

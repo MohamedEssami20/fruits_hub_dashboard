@@ -13,14 +13,7 @@ class OrdersCubit extends Cubit<OrdersState> {
   // create method that get all orders
   void getOrders() async {
     emit(GetOrdersLoading());
-    final result = await ordersRepo.getOrders();
-    result.fold(
-      (failure) => emit(
-        GetOrdersFailure(errorMessage: failure.errorMessage),
-      ),
-      (orders) => emit(
-        GetOrdersSuccess(orders: orders),
-      ),
-    );
+    //final result =  ordersRepo.getOrders();
+    
   }
 }
