@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 abstract class DataBaseService {
   //create method to add data to database;
   Future<void> addData(
@@ -12,7 +10,7 @@ abstract class DataBaseService {
       {required String path, String? documentId, Map<String, dynamic>? query});
 
   // create method to get stream of data from database;
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamData(
+  Stream<dynamic> getStreamData(
       {required String path, Map<String, dynamic>? query});
 
   // create method that check if data is exits;

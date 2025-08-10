@@ -53,25 +53,24 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamData(
+  Stream<dynamic> getStreamData(
       {required String path, Map<String, dynamic>? query}) async* {
     Query<Map<String, dynamic>> documentSnapshot =
-        firebaseFirestore.collection(path);
-    if (query != null) {
-      if (query['orderBy'] != null) {
-        String orderBy = query['orderBy'];
-        bool isAscending = query['descending'];
-        documentSnapshot =
-            documentSnapshot.orderBy(orderBy, descending: isAscending);
+          firebaseFirestore.collection(path);
+      if (query != null) {
+        if (query['orderBy'] != null) {
+          String orderBy = query['orderBy'];
+          bool isAscending = query['descending'];
+          documentSnapshot =
+              documentSnapshot.orderBy(orderBy, descending: isAscending);
+        }
+        if (query['limit'] != null) {
+          int limit = query['limit'];
+          documentSnapshot = documentSnapshot.limit(limit);
+        }
       }
-      if (query['limit'] != null) {
-        int limit = query['limit'];
-        documentSnapshot = documentSnapshot.limit(limit);
+      await for (var data in documentSnapshot.snapshots()) {
+        yield data.docs.map((e) => e.data()).toList();
       }
-    }
-    await for (var result in documentSnapshot.snapshots()) {
-      yield result.docs.map((e) => e.data()).toList()
-          as QuerySnapshot<Map<String, dynamic>>;
-    }
   }
 }
