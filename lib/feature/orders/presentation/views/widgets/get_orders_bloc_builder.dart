@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_hub_dashboard/feature/orders/presentation/views/manager/cubit/orders_cubit.dart';
+import 'package:fruits_hub_dashboard/feature/orders/presentation/views/manager/get_orders_cubit/orders_cubit.dart';
 import 'package:fruits_hub_dashboard/feature/orders/presentation/views/widgets/orders_view_body.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
