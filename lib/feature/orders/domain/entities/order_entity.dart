@@ -12,6 +12,7 @@ class OrderEntity {
   final String paymentMethod;
   final OrderStatus status;
   final String? date;
+  final String orderId;
 
   OrderEntity(
       {required this.userId,
@@ -20,5 +21,6 @@ class OrderEntity {
       required this.orderProductEntity,
       required this.paymentMethod,
       required this.status,
+      required this.orderId,
       this.date});
 }

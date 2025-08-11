@@ -5,6 +5,7 @@ import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_produc
 
 OrderEntity getDummyOrderEntity() {
   return OrderEntity(
+    orderId: "order_123456",
     status:OrderStatus.accepted ,
     userId: "user_123456",
     totalPrice: "450.00",

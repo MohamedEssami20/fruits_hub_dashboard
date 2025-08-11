@@ -19,12 +19,22 @@ class _GetOrdersBlocBuilderState extends State<GetOrdersBlocBuilder> {
     context.read<OrdersCubit>().getOrders();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrdersCubit, OrdersState>(
       builder: (context, state) {
         if (state is GetOrdersSuccess) {
-          return OrdersViewBody(orders: state.orders);
+          if (state.orders.isEmpty) {
+            return const Center(
+              child: Text(
+                'No orders found',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+            );
+          } else {
+            return OrdersViewBody(orders: state.orders);
+          }
         } else if (state is GetOrdersFailure) {
           return Center(
             child: Text('Error: ${state.errorMessage}'),

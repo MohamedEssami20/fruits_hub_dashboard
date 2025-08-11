@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
+import 'package:fruits_hub_dashboard/feature/orders/presentation/views/widgets/update_order_action_button.dart';
 
 import '../../../../../core/enums/order_status.dart';
 
@@ -28,8 +29,7 @@ class OrderItem extends StatelessWidget {
                     _getOrderStatus(order.status),
                     style: const TextStyle(color: Colors.white),
                   ),
-                  backgroundColor:
-                      _getOrderStatusColor(order.status),
+                  backgroundColor: _getOrderStatusColor(order.status),
                 ),
                 Text(
                   order.date != null ? _formatDate("${order.date}") : "No date",
@@ -96,6 +96,8 @@ class OrderItem extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 8),
+            UpdateOrderActionButton(order: order),
           ],
         ),
       ),

@@ -11,6 +11,7 @@ class OrderModel {
   final String paymentMethod;
   final String? status;
   final String? date;
+  final String orderId;
 
   OrderModel({
     required this.userId,
@@ -18,6 +19,7 @@ class OrderModel {
     required this.orderAddressDetailsModel,
     required this.orderProductModel,
     required this.paymentMethod,
+    required this.orderId,
     this.status,
     this.date,
   });
@@ -33,6 +35,7 @@ class OrderModel {
         paymentMethod: json['paymentMethod'],
         status: json['status'] ?? "pending",
         date: json['date'],
+        orderId: json['orderId']??"",
       );
 
   // create to json method
@@ -49,6 +52,7 @@ class OrderModel {
   // create to entity method
   OrderEntity toEntity() => OrderEntity(
         userId: userId,
+        orderId: orderId,
         totalPrice: totalPrice,
         orderAddressDetailsEntity: orderAddressDetailsModel.toEntity(),
         orderProductEntity: orderProductModel.map((e) => e.toEntity()).toList(),
