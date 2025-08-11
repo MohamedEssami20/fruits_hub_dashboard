@@ -16,4 +16,10 @@ abstract class DataBaseService {
   // create method that check if data is exits;
   Future<bool> checkDataExists(
       {required String path, required String documentId});
+
+  // create method that update data in database;
+  Future<void> updateData(
+      {required String path,
+      required Map<String, dynamic> data,
+      required String documentId});
 }

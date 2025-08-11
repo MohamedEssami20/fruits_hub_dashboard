@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:fruits_hub_dashboard/core/enums/order_status.dart';
 import '../../../../core/constant/back_end_endpoints.dart/backend_end_point.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/data_base_service.dart';
@@ -25,6 +26,22 @@ class OrdersReposImpl implements OrdersRepo {
       }
     } on Exception catch (e) {
       yield left(ServerFailure(errorMessage: "Failed to get orders= $e"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateOrderStatus(
+      {required OrderStatus status, required String orderId}) async {
+    try {
+      await _dataBaseService.updateData(
+          path: BackendEndPoint.updateOrderStatusPath,
+          data: {"status": status.name},
+          documentId: orderId);
+      return right(null);
+    } on Exception catch (e) {
+      return left(
+        ServerFailure(errorMessage: "Failed to update order= $e"),
+      );
     }
   }
 }
