@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_entity.dart';
-import 'package:fruits_hub_dashboard/feature/orders/presentation/views/widgets/update_order_action_button.dart';
-
-import '../../../../../core/enums/order_status.dart';
 
 class OrderItem extends StatelessWidget {
   final OrderEntity order;
@@ -25,15 +22,17 @@ class OrderItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Chip(
+                  color: WidgetStatePropertyAll(
+                      getStatusColor(order.lastStatusLabel)),
                   label: Text(
-                    _getOrderStatus(order.status),
+                    order.lastStatusLabel,
                     style: const TextStyle(color: Colors.white),
                   ),
-                  backgroundColor: _getOrderStatusColor(order.status),
+                  backgroundColor: Colors.grey,
                 ),
                 Text(
-                  order.date != null ? _formatDate("${order.date}") : "No date",
-                  style: const TextStyle(color: Colors.grey),
+                  order.lastStatusDate,
+                  style: const TextStyle(color: Colors.grey, fontSize: 16),
                 ),
               ],
             ),
@@ -97,45 +96,27 @@ class OrderItem extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            UpdateOrderActionButton(order: order),
           ],
         ),
       ),
     );
   }
 
-  String _formatDate(String dateString) {
-    try {
-      final dateTime = DateTime.parse(dateString);
-      return "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-    } catch (e) {
-      return dateString;
-    }
-  }
-
-  String _getOrderStatus(OrderStatus status) {
+  // create method that getColor to get color of status
+  Color getStatusColor(String status) {
     switch (status) {
-      case OrderStatus.pending:
-        return 'Pending';
-      case OrderStatus.accepted:
-        return 'accepted';
-      case OrderStatus.delivered:
-        return 'Delivered';
-      case OrderStatus.cancelled:
-        return 'Cancelled';
-    }
-  }
-
-  Color _getOrderStatusColor(OrderStatus status) {
-    switch (status) {
-      case OrderStatus.pending:
+      case 'trackingOrder' || "تم تسجيل الطلب":
+        return Colors.green;
+      case 'acceptedOrder' || "تم قبول الطلب":
         return Colors.orange;
-      case OrderStatus.accepted:
+      case 'orderShipped' || "تم شحن الطلب":
+        return Colors.pinkAccent;
+      case 'orderOnWay' || "الطلب في الطريق":
+        return Colors.blue;
+      case 'orderReceived' || "تم استلام الطلب":
         return Colors.green;
-      case OrderStatus.delivered:
-        return Colors.green;
-      case OrderStatus.cancelled:
-        return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 }

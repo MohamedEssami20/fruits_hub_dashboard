@@ -56,7 +56,7 @@ class FirestoreService implements DataBaseService {
   Stream<dynamic> getStreamData(
       {required String path, Map<String, dynamic>? query}) async* {
     Query<Map<String, dynamic>> documentSnapshot =
-        firebaseFirestore.collection(path);
+        firebaseFirestore.collectionGroup(path);
     if (query != null) {
       if (query['orderBy'] != null) {
         String orderBy = query['orderBy'];

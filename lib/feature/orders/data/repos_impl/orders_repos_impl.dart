@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:fruits_hub_dashboard/core/enums/order_status.dart';
 import '../../../../core/constant/back_end_endpoints.dart/backend_end_point.dart';
@@ -17,11 +19,12 @@ class OrdersReposImpl implements OrdersRepo {
   @override
   Stream<Either<Failure, List<OrderEntity>>> getOrders() async* {
     try {
-      await for (var (data as List<Map<String, dynamic>>) in _dataBaseService
-          .getStreamData(path: BackendEndPoint.getOrdersPath)) {
+      await for (var (data as List<Map<String, dynamic>>)
+          in _dataBaseService.getStreamData(path: "userOrders")) {
         List<OrderEntity> orders = data
             .map<OrderEntity>((e) => OrderModel.fromJson(e).toEntity())
             .toList();
+        log("orders= $orders");
         yield right(orders);
       }
     } on Exception catch (e) {

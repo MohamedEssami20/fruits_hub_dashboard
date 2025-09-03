@@ -1,4 +1,3 @@
-import '../../../../core/enums/order_status.dart';
 import '../../domain/entities/order_entity.dart';
 import 'order_address_details_model.dart';
 import 'order_product_model.dart';
@@ -9,7 +8,7 @@ class OrderModel {
   final OrderAddressDetailsModel orderAddressDetailsModel;
   final List<OrderProductModel> orderProductModel;
   final String paymentMethod;
-  final String? status;
+  final Map<String, dynamic>? status;
   final String? date;
   final String orderId;
 
@@ -24,31 +23,42 @@ class OrderModel {
     this.date,
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
-        userId: json['userId'],
-        totalPrice: json['totalPrice'],
-        orderAddressDetailsModel:
-            OrderAddressDetailsModel.fromJson(json['orderAddressDetailsModel']),
-        orderProductModel: List<OrderProductModel>.from(
-            json['orderProductModel']
-                .map((x) => OrderProductModel.fromJson(x))),
-        paymentMethod: json['paymentMethod'],
-        status: json['status'] ?? "pending",
-        date: json['date'],
-        orderId: json['orderId']??"",
-      );
+  factory OrderModel.fromJson(Map<String, dynamic> json) {
+    final rawStatus = json['status'];
 
-  // create to json method
-  Map<String, dynamic> toJson() => {
-        'userId': userId,
-        'status': status ?? "pending",
-        'date': DateTime.now().toString(),
-        'totalPrice': totalPrice,
-        'orderAddressDetailsModel': orderAddressDetailsModel.toJson(),
-        'orderProductModel': orderProductModel.map((e) => e.toJson()).toList(),
-        'paymentMethod': paymentMethod,
+    // الحالة لو كانت مجرد String
+    Map<String, dynamic> statusMap;
+    if (rawStatus is String) {
+      statusMap = {
+        'trackingOrder': rawStatus,
+        'acceptedOrder': "قيد الإنتظار",
+        'orderShipped': "قيد الإنتظار",
+        'orderOnWay': "قيد الإنتظار",
+        'orderReceived': "قيد الإنتظار",
       };
-
+    } else {
+      final rawMap = Map<String, dynamic>.from(rawStatus ?? {});
+      statusMap = {
+        'trackingOrder': rawMap['trackingOrder'] ?? "قيد الإنتظار",
+        'acceptedOrder': rawMap['acceptedOrder'] ?? "قيد الإنتظار",
+        'orderShipped': rawMap['orderShipped'] ?? "قيد الإنتظار",
+        'orderOnWay': rawMap['orderOnWay'] ?? "قيد الإنتظار",
+        'orderReceived': rawMap['orderReceived'] ?? "قيد الإنتظار",
+      };
+    }
+    return OrderModel(
+      userId: json['userId'],
+      totalPrice: json['totalPrice'],
+      orderAddressDetailsModel:
+          OrderAddressDetailsModel.fromJson(json['orderAddressDetailsModel']),
+      orderProductModel: List<OrderProductModel>.from(
+          json['orderProductModel'].map((x) => OrderProductModel.fromJson(x))),
+      paymentMethod: json['paymentMethod'],
+      status: statusMap,
+      date: json['date'],
+      orderId: json['orderId'] ?? "",
+    );
+  }
   // create to entity method
   OrderEntity toEntity() => OrderEntity(
         userId: userId,
@@ -57,16 +67,7 @@ class OrderModel {
         orderAddressDetailsEntity: orderAddressDetailsModel.toEntity(),
         orderProductEntity: orderProductModel.map((e) => e.toEntity()).toList(),
         paymentMethod: paymentMethod,
-        status: getOrderStatus(),
+        status: status!,
         date: date,
       );
-
-  OrderStatus getOrderStatus() {
-    return status == null
-        ? OrderStatus.pending
-        : OrderStatus.values.firstWhere((element) {
-            var orderStatus = element.name.toString();
-            return orderStatus == (status ?? "pending");
-          });
-  }
 }

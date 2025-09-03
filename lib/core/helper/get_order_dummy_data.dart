@@ -6,7 +6,7 @@ import 'package:fruits_hub_dashboard/feature/orders/domain/entities/order_produc
 OrderEntity getDummyOrderEntity() {
   return OrderEntity(
     orderId: "order_123456",
-    status:OrderStatus.accepted ,
+    status:{"status": OrderStatus.pending.name} ,
     userId: "user_123456",
     totalPrice: "450.00",
     paymentMethod: "cash",
@@ -21,19 +21,19 @@ OrderEntity getDummyOrderEntity() {
     orderProductEntity: [
       OrderProductEntity(
         name: "قلم حبر",
-        imageUrl: "https://via.placeholder.com/150",
+        imageUrl: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt48088d374f43008d/665640cc84249f24714a4510/types-of-fruit-kiwi.jpg?q=70&width=3840&auto=webp",
         price: 25.0,
         quantity: 2,
       ),
       OrderProductEntity(
         name: "دفتر ملاحظات",
-        imageUrl: "https://via.placeholder.com/150",
+        imageUrl: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt48088d374f43008d/665640cc84249f24714a4510/types-of-fruit-kiwi.jpg?q=70&width=3840&auto=webp",
         price: 50.0,
         quantity: 3,
       ),
       OrderProductEntity(
         name: "آلة حاسبة",
-        imageUrl: "https://via.placeholder.com/150",
+        imageUrl: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt48088d374f43008d/665640cc84249f24714a4510/types-of-fruit-kiwi.jpg?q=70&width=3840&auto=webp",
         price: 200.0,
         quantity: 1,
       ),

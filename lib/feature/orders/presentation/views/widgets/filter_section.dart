@@ -9,7 +9,7 @@ class FilterSection extends StatelessWidget {
       child: const Row(
         spacing: 8,
         children: [
-          Icon(Icons.filter_list_outlined),
+          // Icon(Icons.filter_list_outlined),
           Text(
             'Filter',
             style: TextStyle(
