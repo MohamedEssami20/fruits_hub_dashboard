@@ -41,20 +41,21 @@ class OrdersReposImpl implements OrdersRepo {
     try {
       await _dataBaseService.updateData(
         mainPath: BackendEndpoints.orderPath,
-        documentId: userId,
+        mainDocumentId: userId,
+        subDocumentId: orderId,
         subPath: BackendEndpoints.userOrders,
         data: {
-          "status": {
-            key: convertDateTimeToString(),
-          },
+          "status.$key": convertDateTimeToString(),
         },
       );
       return right(null);
     } on FirebaseException catch (e) {
+      log("error at updateOrderStatus 1= ${e.message}");
       return left(
         ServerFailure(errorMessage: e.message.toString()),
       );
     } catch (e) {
+      log("error at updateOrderStatus 2= ${e.toString()}");
       return left(
         ServerFailure(errorMessage: "فشل في تحديث الطلب"),
       );
@@ -65,7 +66,7 @@ class OrdersReposImpl implements OrdersRepo {
 // create method that convert date time to string with intl package;
 String convertDateTimeToString() {
   DateTime now = DateTime.now();
-  Intl.systemLocale = 'ar';
+  Intl.defaultLocale = 'ar';
   String formattedDate = DateFormat.yMMMd().format(now).toString();
   return formattedDate;
 }

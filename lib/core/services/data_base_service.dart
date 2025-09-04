@@ -22,5 +22,5 @@ abstract class DataBaseService {
       {required String mainPath,
       required String subPath,
       required Map<String, dynamic> data,
-      required String documentId});
+      required String mainDocumentId, required String subDocumentId});
 }

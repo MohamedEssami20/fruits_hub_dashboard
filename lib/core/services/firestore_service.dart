@@ -79,12 +79,12 @@ class FirestoreService implements DataBaseService {
       {required String mainPath,
       required String subPath,
       required Map<String, dynamic> data,
-      required String documentId}) async {
+      required String mainDocumentId, required String subDocumentId}) async {
     await firebaseFirestore
         .collection(mainPath)
-        .doc(documentId)
+        .doc(mainDocumentId)
         .collection(subPath)
-        .doc()
-        .update(data);
+        .doc(subDocumentId)
+        .update(data, );
   }
 }
