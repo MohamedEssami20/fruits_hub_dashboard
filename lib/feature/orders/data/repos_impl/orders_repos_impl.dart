@@ -1,8 +1,9 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:fruits_hub_dashboard/core/enums/order_status.dart';
-import '../../../../core/constant/back_end_endpoints.dart/backend_end_point.dart';
+import 'package:fruits_hub_dashboard/core/utils/backend_endpoints.dart';
+import 'package:intl/intl.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/data_base_service.dart';
 import '../../domain/entities/order_entity.dart' show OrderEntity;
@@ -34,17 +35,37 @@ class OrdersReposImpl implements OrdersRepo {
 
   @override
   Future<Either<Failure, void>> updateOrderStatus(
-      {required OrderStatus status, required String orderId}) async {
+      {required String orderId,
+      required String key,
+      required String userId}) async {
     try {
       await _dataBaseService.updateData(
-          path: BackendEndPoint.updateOrderStatusPath,
-          data: {"status": status.name},
-          documentId: orderId);
+        mainPath: BackendEndpoints.orderPath,
+        documentId: userId,
+        subPath: BackendEndpoints.userOrders,
+        data: {
+          "status": {
+            key: convertDateTimeToString(),
+          },
+        },
+      );
       return right(null);
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       return left(
-        ServerFailure(errorMessage: "Failed to update order= $e"),
+        ServerFailure(errorMessage: e.message.toString()),
+      );
+    } catch (e) {
+      return left(
+        ServerFailure(errorMessage: "فشل في تحديث الطلب"),
       );
     }
   }
+}
+
+// create method that convert date time to string with intl package;
+String convertDateTimeToString() {
+  DateTime now = DateTime.now();
+  Intl.systemLocale = 'ar';
+  String formattedDate = DateFormat.yMMMd().format(now).toString();
+  return formattedDate;
 }

@@ -66,4 +66,36 @@ class OrderEntity {
   String get lastStatusDate {
     return status[lastStatusKey] ?? "";
   }
+
+  // create method that get key of next status
+  String? get getNextStatusKey {
+    int currentIndex = _orderedKeys.indexOf(lastStatusKey);
+    if (currentIndex < _orderedKeys.length - 1) {
+      return _orderedKeys[currentIndex + 1];
+    }
+    return null;
+  }
+
+  //create methodt that get label of next status
+  String? get getNextStatusLabel {
+  final key = getNextStatusKey;
+  if (key == null) return null;
+
+  switch (key) {
+    case 'trackingOrder':
+      return "تأكيد تسجيل الطلب";
+    case 'acceptedOrder':
+      return "قبول الطلب";
+    case 'orderShipped':
+      return "شحن الطلب";
+    case 'orderOnWay':
+      return "إرسال الطلب";
+    case 'orderReceived':
+      return "تأكيد استلام الطلب";
+    default:
+      return null;
+  }
+}
+
+
 }

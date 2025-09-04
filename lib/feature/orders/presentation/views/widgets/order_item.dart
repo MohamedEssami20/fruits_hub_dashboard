@@ -26,7 +26,7 @@ class OrderItem extends StatelessWidget {
                       getStatusColor(order.lastStatusLabel)),
                   label: Text(
                     order.lastStatusLabel,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   backgroundColor: Colors.grey,
                 ),
@@ -96,6 +96,9 @@ class OrderItem extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
+
+            // زر التحديث
+            UpdateOrderActionButton(order: order),
           ],
         ),
       ),
@@ -118,5 +121,37 @@ class OrderItem extends StatelessWidget {
       default:
         return Colors.grey;
     }
+  }
+}
+
+class UpdateOrderActionButton extends StatelessWidget {
+  const UpdateOrderActionButton({super.key, required this.order});
+  final OrderEntity order;
+  @override
+  Widget build(BuildContext context) {
+    final nextLabel = order.getNextStatusLabel;
+    final nextKey = order.getNextStatusKey;
+
+    if (nextKey == null || nextLabel == null) {
+      return const SizedBox.shrink(); // يخفي الزر لو مفيش حالة تالية
+    }
+
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        onPressed: () {},
+        child: Text(
+          nextLabel,
+          style: const TextStyle(fontSize: 16, color: Colors.white),
+        ),
+      ),
+    );
   }
 }

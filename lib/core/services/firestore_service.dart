@@ -76,9 +76,15 @@ class FirestoreService implements DataBaseService {
 
   @override
   Future<void> updateData(
-      {required String path,
+      {required String mainPath,
+      required String subPath,
       required Map<String, dynamic> data,
       required String documentId}) async {
-    await firebaseFirestore.collection(path).doc(documentId).update(data);
+    await firebaseFirestore
+        .collection(mainPath)
+        .doc(documentId)
+        .collection(subPath)
+        .doc()
+        .update(data);
   }
 }

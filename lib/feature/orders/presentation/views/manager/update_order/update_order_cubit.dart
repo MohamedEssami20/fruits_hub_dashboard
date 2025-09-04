@@ -13,16 +13,16 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
   // create method that update order status
   Future<void> updateOrderStatus(
       {required OrderStatus status, required String orderId}) async {
-    emit(UpdateOrderLoading());
-    final result =
-        await ordersRepo.updateOrderStatus(status: status, orderId: orderId);
-    result.fold(
-      (failure) => emit(
-        UpdateOrderFailure(errorMessage: failure.errorMessage),
-      ),
-      (r) => emit(
-        UpdateOrderSuccess(),
-      ),
-    );
+    // emit(UpdateOrderLoading());
+    // final result =
+    //     await ordersRepo.updateOrderStatus(status: status, orderId: orderId);
+    // result.fold(
+    //   (failure) => emit(
+    //     UpdateOrderFailure(errorMessage: failure.errorMessage),
+    //   ),
+    //   (r) => emit(
+    //     UpdateOrderSuccess(),
+    //   ),
+    // );
   }
 }
