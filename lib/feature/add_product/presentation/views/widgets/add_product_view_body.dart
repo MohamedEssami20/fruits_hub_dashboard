@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_dashboard/core/helper/func/generate_product_id.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_text_form_filed.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/is_featured_item.dart';
@@ -118,6 +119,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                     setState(() {});
                     AddProductInputEntity addProductInputEntity =
                         AddProductInputEntity(
+                      id: generateProductId(),
                       reviews: [
                         ReviewsEntity(
                             name: "mohamed Essam",
@@ -137,7 +139,6 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       unitAmount: unitAmount,
                       expeireationMonths: expeireationMonths,
                       numberOfCalories: numberOfCalories,
-                      
                     );
                     await context.read<AddProductCubit>().addProduct(
                         addProductInputEntity: addProductInputEntity);

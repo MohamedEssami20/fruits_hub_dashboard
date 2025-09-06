@@ -13,16 +13,18 @@ class AddProductRepoImpl implements AddProductRepo {
   @override
   Future<Either<Failure, void>> addProduct(
       AddProductInputEntity addProductInputEntity) async {
-        try {
-          await dataBaseService.addData(
-            path: BackendEndPoint.addProductPath,
-            data: AddProductInputModel.fromProductEntity(addProductInputEntity).toJson(),
-          );
-          return right(null);
-        } catch (e) {
-          return left(
-            ServerFailure(errorMessage: "Failed to add product"),
-          );
-        }
-      }
+    try {
+      await dataBaseService.addData(
+        documentId: addProductInputEntity.id,
+        path: BackendEndPoint.addProductPath,
+        data: AddProductInputModel.fromProductEntity(addProductInputEntity)
+            .toJson(),
+      );
+      return right(null);
+    } catch (e) {
+      return left(
+        ServerFailure(errorMessage: "Failed to add product"),
+      );
+    }
+  }
 }
