@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_hub_dashboard/feature/products/presentation/views/products_view.dart';
 
 import '../../../feature/add_product/presentation/views/add_product_view.dart';
 import '../../../feature/dashboard/presentation/views/dashboard_view.dart';
 import '../../../feature/orders/presentation/views/orders_view.dart';
-
 
 Route<dynamic>? onGenerateRoute(RouteSettings? routeSettings) {
   switch (routeSettings!.name) {
@@ -19,7 +19,11 @@ Route<dynamic>? onGenerateRoute(RouteSettings? routeSettings) {
       return MaterialPageRoute(
         builder: (context) => const OrdersView(),
       );
-     
+    case ProductsView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const ProductsView(),
+      );
+
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(),
