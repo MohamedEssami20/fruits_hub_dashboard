@@ -27,4 +27,24 @@ class AddProductRepoImpl implements AddProductRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> editProduct(
+      AddProductInputEntity addProductInputEntity) async {
+    try {
+      await dataBaseService.updateData(
+        mainDocumentId: addProductInputEntity.id,
+        mainPath: BackendEndPoint.addProductPath,
+        subPath: null,
+        subDocumentId: null,
+        data: AddProductInputModel.fromProductEntity(addProductInputEntity)
+            .toJson(),
+      );
+      return right(null);
+    } catch (e) {
+      return left(
+        ServerFailure(errorMessage: "Failed to add product"),
+      );
+    }
+  }
 }

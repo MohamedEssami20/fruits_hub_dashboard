@@ -44,4 +44,15 @@ class SupabaseStorageService implements StorageService {
     log("image url in storage service= $result");
     return result;
   }
+  
+  @override
+  Future<String> editImage(File file, String path) async{
+    String fileName = p.basename(file.path);
+    String fileExetension = p.extension(file.path);
+    String result = await _supabase.client.storage
+        .from("fruitsimages")
+        .update("$path/$fileName.$fileExetension", file);
+    log("update image url in storage service= $result");
+    return result;
+  }
 }

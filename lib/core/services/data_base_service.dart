@@ -20,7 +20,7 @@ abstract class DataBaseService {
   // create method that update data in database;
   Future<void> updateData(
       {required String mainPath,
-      required String subPath,
+      required String? subPath,
       required Map<String, dynamic> data,
-      required String mainDocumentId, required String subDocumentId});
+      required String mainDocumentId, required String? subDocumentId});
 }

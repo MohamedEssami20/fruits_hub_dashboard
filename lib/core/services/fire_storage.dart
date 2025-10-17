@@ -16,4 +16,9 @@ class FireStorage implements StorageService {
     String fileUrl = await reference.getDownloadURL();
     return fileUrl;
   }
+  
+  @override
+  Future<String> editImage(File file, String path) {
+    throw UnimplementedError();
+  }
 }
