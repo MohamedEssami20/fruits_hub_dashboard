@@ -46,7 +46,7 @@ class SupabaseStorageService implements StorageService {
   }
   
   @override
-  Future<String> editImage(File file, String path) async{
+  Future<String> editImage({required File file, required String path}) async{
     String fileName = p.basename(file.path);
     String fileExetension = p.extension(file.path);
     String result = await _supabase.client.storage

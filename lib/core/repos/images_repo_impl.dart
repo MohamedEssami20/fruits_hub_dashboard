@@ -24,4 +24,21 @@ class ImagesRepoImpl implements ImagesRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, String>> editProductImage({required File file}) async {
+    try {
+      final imageUrl = await storageService.editImage(
+        file: file,
+        path: BackendEndPoint.imagePath,
+      );
+      return right(imageUrl);
+    } catch (error) {
+      return left(
+        ServerFailure(
+          errorMessage: "Failed to Edit image",
+        ),
+      );
+    }
+  }
 }

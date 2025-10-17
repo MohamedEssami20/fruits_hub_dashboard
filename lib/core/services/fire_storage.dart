@@ -18,7 +18,13 @@ class FireStorage implements StorageService {
   }
   
   @override
-  Future<String> editImage(File file, String path) {
-    throw UnimplementedError();
+  Future<String> editImage({required File file, required String path}) async{
+    String fileName = p.basename(file.path);
+    String fileExetension = p.extension(file.path);
+    Reference reference =
+        storageReference.child("$path/$fileName.$fileExetension");
+    await reference.putFile(file);
+    String fileUrl = await reference.getDownloadURL();
+    return fileUrl;
   }
 }

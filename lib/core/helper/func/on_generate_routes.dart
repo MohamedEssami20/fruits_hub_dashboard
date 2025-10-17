@@ -4,6 +4,7 @@ import 'package:fruits_hub_dashboard/feature/products/presentation/views/product
 import '../../../feature/add_product/presentation/views/add_product_view.dart';
 import '../../../feature/dashboard/presentation/views/dashboard_view.dart';
 import '../../../feature/orders/presentation/views/orders_view.dart';
+import '../../../feature/products/presentation/views/edit_product_view.dart';
 
 Route<dynamic>? onGenerateRoute(RouteSettings? routeSettings) {
   switch (routeSettings!.name) {
@@ -22,6 +23,10 @@ Route<dynamic>? onGenerateRoute(RouteSettings? routeSettings) {
     case ProductsView.routeName:
       return MaterialPageRoute(
         builder: (context) => const ProductsView(),
+      );
+    case EditProductView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const EditProductView(),
       );
 
     default:

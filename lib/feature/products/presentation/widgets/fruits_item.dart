@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/core/utils/my_colors.dart';
+import 'package:fruits_hub_dashboard/feature/products/presentation/views/edit_product_view.dart';
 import '../../../../core/utils/app_text_style.dart';
 import '../../../../core/utils/custom_network_image.dart';
 import '../../domain/entities/product_entity.dart';
@@ -78,7 +79,11 @@ class FruitsItem extends StatelessWidget {
                   ),
                   trailing: GestureDetector(
                     onTap: () {
-                      //
+                      Navigator.pushNamed(
+                        context,
+                        EditProductView.routeName,
+                        arguments: product,
+                      );
                     },
                     child: CircleAvatar(
                       backgroundColor: MyColors.kPrimaryColor,

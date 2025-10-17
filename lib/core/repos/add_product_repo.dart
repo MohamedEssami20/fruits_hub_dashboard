@@ -6,6 +6,4 @@ abstract class AddProductRepo {
   // create method that add product;
   Future<Either<Failure, void>> addProduct(AddProductInputEntity addProductInputEntity);
   
-  // edit method that edit product;
-  Future<Either<Failure, void>> editProduct(AddProductInputEntity addProductInputEntity);
 }

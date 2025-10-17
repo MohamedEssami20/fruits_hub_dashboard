@@ -85,7 +85,7 @@ class FirestoreService implements DataBaseService {
       await firebaseFirestore
           .collection(mainPath)
           .doc(mainDocumentId)
-          .update(data);
+          .update(data,);
     } else {
       await firebaseFirestore
           .collection(mainPath)
