@@ -7,7 +7,6 @@ import 'package:fruits_hub_dashboard/core/utils/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_text_form_filed.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/is_featured_item.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/is_organic_product.dart';
-import 'package:fruits_hub_dashboard/feature/add_product/presentation/domain/entities/reviews_entity.dart';
 import 'package:fruits_hub_dashboard/feature/add_product/presentation/manager/cubit/add_product_cubit.dart';
 import 'package:fruits_hub_dashboard/feature/add_product/presentation/views/widgets/image_field.dart';
 
@@ -120,15 +119,6 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                     AddProductInputEntity addProductInputEntity =
                         AddProductInputEntity(
                       id: generateProductId(),
-                      reviews: [
-                        ReviewsEntity(
-                            name: "mohamed Essam",
-                            ratting: 6,
-                            date: DateTime.now().toIso8601String(),
-                            image:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s",
-                            reviewDescription: "this is a very good product"),
-                      ],
                       name: name,
                       price: price,
                       code: code,
