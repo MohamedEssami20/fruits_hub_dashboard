@@ -6,8 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ImageField extends StatefulWidget {
-  const ImageField({super.key, required this.onChanged});
+  const ImageField({super.key, required this.onChanged, this.currentImage});
   final ValueChanged<File?> onChanged;
+  final String? currentImage;
   @override
   State<ImageField> createState() => _ImageFieldState();
 }
@@ -15,6 +16,13 @@ class ImageField extends StatefulWidget {
 class _ImageFieldState extends State<ImageField> {
   bool isLoading = false;
   File? fileImage;
+  late String currentImage;
+  @override
+  void initState() {
+    currentImage = widget.currentImage ?? '';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
@@ -37,21 +45,28 @@ class _ImageFieldState extends State<ImageField> {
                 border: Border.all(color: Colors.grey, width: 1),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: fileImage != null
-                  ? Image.file(fileImage!)
-                  : const Icon(
-                      Icons.image_outlined,
-                      size: 250,
-                    ),
+              child: currentImage.isNotEmpty
+                  ? Image.network(widget.currentImage!)
+                  : fileImage != null
+                      ? Image.file(fileImage!)
+                      : const Icon(
+                          Icons.image_outlined,
+                          size: 250,
+                        ),
             ),
             IconButton(
               onPressed: () {
                 setState(() {
-                  fileImage = null;
-                  widget.onChanged(fileImage);
+                  if (currentImage.isNotEmpty) {
+                    currentImage = '';
+                    widget.onChanged(null);
+                  } else {
+                    fileImage = null;
+                    widget.onChanged(null);
+                  }
                 });
               },
-              icon: fileImage != null
+              icon: fileImage != null || currentImage.isNotEmpty
                   ? const Icon(
                       Icons.delete_sharp,
                       color: Colors.red,
@@ -59,6 +74,7 @@ class _ImageFieldState extends State<ImageField> {
                     )
                   : const SizedBox(),
             ),
+            Text("image name= ${getFileName(fileImage ?? File(currentImage))}"),
           ],
         ),
       ),
@@ -76,5 +92,13 @@ class _ImageFieldState extends State<ImageField> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  String getFileName(File path) {
+    if (path.path.isNotEmpty) {
+      return path.path.split('/').last;
+    } else {
+      return "no image";
+    }
   }
 }

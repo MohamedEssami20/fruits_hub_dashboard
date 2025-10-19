@@ -20,7 +20,6 @@ class AddProductViewBodyBlocConsumer extends StatelessWidget {
             inAsyncCall: state is AddProductLoading,
             child: const AddProductViewBody());
       },
-      
       listener: (context, state) {
         if (state is AddProductSucess) {
           showSuccessBar(context, "sucessfully added");

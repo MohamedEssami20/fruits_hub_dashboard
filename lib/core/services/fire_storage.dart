@@ -16,9 +16,9 @@ class FireStorage implements StorageService {
     String fileUrl = await reference.getDownloadURL();
     return fileUrl;
   }
-  
+
   @override
-  Future<String> editImage({required File file, required String path}) async{
+  Future<String> editImage({required File file, required String path}) async {
     String fileName = p.basename(file.path);
     String fileExetension = p.extension(file.path);
     Reference reference =
@@ -26,5 +26,14 @@ class FireStorage implements StorageService {
     await reference.putFile(file);
     String fileUrl = await reference.getDownloadURL();
     return fileUrl;
+  }
+
+  @override
+  Future<void> deleteImage({required File file, required String path}) {
+    String fileName = p.basename(file.path);
+    String fileExetension = p.extension(file.path);
+    Reference reference =
+        storageReference.child("$path/$fileName.$fileExetension");
+    return reference.delete();
   }
 }

@@ -6,4 +6,7 @@ abstract class StorageService {
 
   // create method that edit image in database;
   Future<String> editImage({required File file, required String path});
+
+  // create methodt that delete image from database;
+  Future<void> deleteImage({ required File file,required String path});
 }

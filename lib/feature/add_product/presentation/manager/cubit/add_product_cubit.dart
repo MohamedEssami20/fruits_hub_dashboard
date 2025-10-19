@@ -20,7 +20,7 @@ class AddProductCubit extends Cubit<AddProductState> {
       {required AddProductInputEntity addProductInputEntity}) async {
     emit(AddProductLoading());
     Either<Failure, String> result =
-        await imagesRepo.uploadImage(addProductInputEntity.image);
+        await imagesRepo.uploadImage(addProductInputEntity.image!);
     result.fold(
       (failure) {
         emit(

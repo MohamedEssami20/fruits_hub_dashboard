@@ -81,11 +81,10 @@ class FirestoreService implements DataBaseService {
       required Map<String, dynamic> data,
       required String mainDocumentId,
       required String? subDocumentId}) async {
-    if (subPath == null) {
-      await firebaseFirestore
-          .collection(mainPath)
-          .doc(mainDocumentId)
-          .update(data,);
+    if (subPath == null || subDocumentId == null) {
+      await firebaseFirestore.collection(mainPath).doc(mainDocumentId).update(
+            data,
+          );
     } else {
       await firebaseFirestore
           .collection(mainPath)

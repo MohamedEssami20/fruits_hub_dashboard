@@ -3,24 +3,37 @@ import 'package:fruits_hub_dashboard/core/utils/Widgets/custom_checkbox.dart';
 import '../../../../../core/utils/app_text_style.dart';
 
 class IsOrganicProduct extends StatefulWidget {
-  const IsOrganicProduct({super.key, required this.onCahanged});
+  const IsOrganicProduct(
+      {super.key, required this.onCahanged, this.isChecked = false});
   final ValueChanged<bool> onCahanged;
+  final bool? isChecked;
   @override
   State<IsOrganicProduct> createState() => _IsOrganicProductState();
 }
 
 class _IsOrganicProductState extends State<IsOrganicProduct> {
   bool termsAndCondition = false;
+  late bool isChecked;
+  @override
+  void initState() {
+    isChecked = widget.isChecked ?? termsAndCondition;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         CustomCheckbox(
-          isChecked: termsAndCondition,
+          isChecked: isChecked,
           onChanged: (value) {
             termsAndCondition = value!;
-            widget.onCahanged(value);
-            setState(() {});
+            setState(
+              () {
+                isChecked = value;
+              },
+            );
+            widget.onCahanged(isChecked);
           },
         ),
         const SizedBox(width: 10),

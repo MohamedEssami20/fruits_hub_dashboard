@@ -18,7 +18,10 @@ class ProductsView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => ProductsCubit(
             productRepos: GetItService().getIt.get<ProductsRepos>()),
-        child: const ProductsViewBody(),
+        child: const Padding(
+          padding: EdgeInsets.all(12),
+          child: ProductsViewBody(),
+        ),
       ),
     );
   }

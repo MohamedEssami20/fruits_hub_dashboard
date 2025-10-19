@@ -18,7 +18,8 @@ class EditProductCubit extends Cubit<EditProductState> {
   Future<void> editProduct(
       {required AddProductInputEntity addProductInputEntity}) async {
     emit(EditProductLoading());
-    final image = await imagesRepo.uploadImage(addProductInputEntity.image);
+    if(addProductInputEntity.image!=null){
+        final image = await imagesRepo.uploadImage(addProductInputEntity.image!);
     image.fold(
       (failure) {
         emit(
@@ -27,7 +28,7 @@ class EditProductCubit extends Cubit<EditProductState> {
       },
       (imageUrl) async {
         addProductInputEntity.iamgeUrl =
-            imageUrl + BackendEndpoints.baseImageUrl;
+            BackendEndpoints.baseImageUrl + imageUrl;
         final result = await productsRepos.editProduct(
             addProductInputEntity: addProductInputEntity);
         result.fold(
@@ -44,5 +45,22 @@ class EditProductCubit extends Cubit<EditProductState> {
         );
       },
     );
+    }
+    else{
+      final result = await productsRepos.editProduct(
+          addProductInputEntity: addProductInputEntity);
+      result.fold(
+        (failure) {
+          emit(
+            EditProductFailure(errormessage: failure.errorMessage),
+          );
+        },
+        (success) {
+          emit(
+            EditProductSuccess(),
+          );
+        },
+      );
+    }
   }
 }

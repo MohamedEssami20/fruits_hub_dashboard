@@ -28,9 +28,9 @@ class ImagesRepoImpl implements ImagesRepo {
   @override
   Future<Either<Failure, String>> editProductImage({required File file}) async {
     try {
-      final imageUrl = await storageService.editImage(
-        file: file,
-        path: BackendEndPoint.imagePath,
+      final imageUrl = await storageService.uploadImage(
+        file,
+        BackendEndPoint.imagePath,
       );
       return right(imageUrl);
     } catch (error) {

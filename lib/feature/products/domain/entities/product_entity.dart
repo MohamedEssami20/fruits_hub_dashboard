@@ -9,11 +9,11 @@ class ProductEntity extends Equatable {
   final String code;
   final num price;
   final File image;
-  final bool isFeatured;
+   bool? isFeatured;
   final String description;
   String? iamgeUrl;
   final int expeireationMonths;
-  final bool isOraganic;
+   bool? isOraganic;
   final int numberOfCalories;
   final num avgRating;
   final num ratingCount;

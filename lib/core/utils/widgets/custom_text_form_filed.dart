@@ -9,13 +9,16 @@ class CustomTextFormFiled extends StatelessWidget {
       required this.textInputType,
       this.suffixIcon,
       this.onSaved,
-      this.obscureText = false, this.maxLines});
-  final String hintText;
+      this.obscureText = false,
+      this.maxLines,
+      this.initialValue});
+  final String? hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
   final void Function(String?)? onSaved;
   final bool obscureText;
   final int? maxLines;
+  final String? initialValue;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -25,9 +28,11 @@ class CustomTextFormFiled extends StatelessWidget {
         }
         return null;
       },
+      initialValue: initialValue,
       maxLines: maxLines,
       obscureText: obscureText,
       onSaved: onSaved,
+      style: TextStyles.regular16.copyWith(color: Colors.black),
       keyboardType: textInputType,
       decoration: InputDecoration(
         hintText: hintText,

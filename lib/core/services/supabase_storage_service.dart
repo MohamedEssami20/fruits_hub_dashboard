@@ -36,23 +36,37 @@ class SupabaseStorageService implements StorageService {
 
   @override
   Future<String> uploadImage(File file, String path) async {
-    String fileName = p.basename(file.path);
+    String fileName = p.basenameWithoutExtension(file.path);
     String fileExetension = p.extension(file.path);
-    String result = await _supabase.client.storage
-        .from("fruitsimages")
-        .upload("$path/$fileName.$fileExetension", file);
+    String result = await _supabase.client.storage.from("fruitsimages").upload(
+        "$path/$fileName/$fileExetension", file,
+        fileOptions: const FileOptions(upsert: true));
     log("image url in storage service= $result");
     return result;
   }
-  
+
   @override
-  Future<String> editImage({required File file, required String path}) async{
-    String fileName = p.basename(file.path);
+  Future<String> editImage({required File file, required String path}) async {
+    String fileName = p.basenameWithoutExtension(file.path);
     String fileExetension = p.extension(file.path);
-    String result = await _supabase.client.storage
-        .from("fruitsimages")
-        .update("$path/$fileName.$fileExetension", file);
+    String result = await _supabase.client.storage.from("fruitsimages").update(
+          "$path/$fileName.$fileExetension",
+          file,
+          fileOptions: const FileOptions(
+            upsert: true,
+          ),
+        );
+
     log("update image url in storage service= $result");
     return result;
+  }
+
+  @override
+  Future<void> deleteImage({required File file, required String path}) async {
+    String fileName = p.basename(file.path);
+    String fileExetension = p.extension(file.path);
+    await _supabase.client.storage
+        .from("fruitsimages")
+        .remove(["$path/$fileName/$fileExetension"]);
   }
 }

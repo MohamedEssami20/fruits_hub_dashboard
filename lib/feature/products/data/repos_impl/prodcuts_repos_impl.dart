@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -55,12 +57,14 @@ class ProdcutsReposImpl implements ProductsRepos {
       );
       return right(null);
     } on FirebaseException catch (e) {
+      log("error at editProduct= ${e.message.toString()}");
       return left(
         ServerFailure(
           errorMessage: e.message.toString(),
         ),
       );
     } catch (error) {
+      log("error at editProduct= ${error.toString()}");
       return left(
         ServerFailure(
           errorMessage: error.toString(),
