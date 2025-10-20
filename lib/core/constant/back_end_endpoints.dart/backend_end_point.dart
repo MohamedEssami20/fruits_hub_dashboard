@@ -6,4 +6,5 @@ class BackendEndPoint {
   static const String userPath = "users";
   static const String getOrdersPath = "orders";
   static const String updateOrderStatusPath = "orders";
+  static const String addAvertising ="Advertising";
 }

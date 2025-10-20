@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:fruits_hub_dashboard/core/services/storage_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:path/path.dart' as p;
-import '../utils/backend_endpoints.dart';
+import '../utils/app_keys.dart';
 
 class SupabaseStorageService implements StorageService {
   static late Supabase _supabase;
@@ -29,8 +29,8 @@ class SupabaseStorageService implements StorageService {
 
   static Future<void> initSupabaseService() async {
     _supabase = await Supabase.initialize(
-      url: BackendEndpoints.supabaseProjectUrl,
-      anonKey: BackendEndpoints.supabasseProjectApoKey,
+      url: AppKeys.supabaseProjectUrl,
+      anonKey: AppKeys.supabasseProjectApoKey,
     );
   }
 

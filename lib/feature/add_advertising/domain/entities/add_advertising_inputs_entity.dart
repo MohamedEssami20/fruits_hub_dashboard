@@ -1,7 +1,9 @@
 import 'dart:io';
 
-class AddProductInputEntity {
+class AddAdvertisingInputsEntity {
   final String id;
+  final String advName;
+  final String advDiscount;
   final String name;
   final String code;
   final num price;
@@ -15,7 +17,7 @@ class AddProductInputEntity {
   final num avgRating;
   final num ratingCount;
   final int unitAmount;
-  AddProductInputEntity({
+  AddAdvertisingInputsEntity({
     required this.id,
     required this.name,
     required this.code,
@@ -30,5 +32,7 @@ class AddProductInputEntity {
     this.avgRating = 0.0,
     this.ratingCount = 0,
     required this.unitAmount,
+    required this.advName,
+    required this.advDiscount,
   });
 }

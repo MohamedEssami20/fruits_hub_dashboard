@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dashboard/core/repos/add_product_repo.dart';
 import 'package:fruits_hub_dashboard/core/repos/images_repo.dart';
-import 'package:fruits_hub_dashboard/core/utils/backend_endpoints.dart';
+import 'package:fruits_hub_dashboard/core/utils/app_keys.dart';
 import 'package:fruits_hub_dashboard/feature/add_product/presentation/domain/entities/add_product_input_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +28,7 @@ class AddProductCubit extends Cubit<AddProductState> {
         );
       },
       (imageUrl) async {
-        addProductInputEntity.iamgeUrl =
-            BackendEndpoints.baseImageUrl + imageUrl;
+        addProductInputEntity.iamgeUrl = AppKeys.baseImageUrl + imageUrl;
         Either<Failure, void> result =
             await addProductRepo.addProduct(addProductInputEntity);
         result.fold(

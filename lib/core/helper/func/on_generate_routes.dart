@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dashboard/feature/products/presentation/views/products_view.dart';
 
+import '../../../feature/add_advertising/presentation/views/add_advertising_view.dart';
 import '../../../feature/add_product/presentation/views/add_product_view.dart';
 import '../../../feature/dashboard/presentation/views/dashboard_view.dart';
 import '../../../feature/orders/presentation/views/orders_view.dart';
@@ -25,9 +26,13 @@ Route<dynamic>? onGenerateRoute(RouteSettings? routeSettings) {
       return MaterialPageRoute(
         builder: (context) => const ProductsView(),
       );
+    case AddAdvertisingView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const AddAdvertisingView(),
+      );
     case EditProductView.routeName:
       return MaterialPageRoute(
-        builder: (context) =>  EditProductView(
+        builder: (context) => EditProductView(
           productEntity: routeSettings.arguments as ProductEntity,
         ),
       );

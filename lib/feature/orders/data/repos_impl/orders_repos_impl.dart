@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:fruits_hub_dashboard/core/utils/backend_endpoints.dart';
+import 'package:fruits_hub_dashboard/core/utils/app_keys.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/data_base_service.dart';
@@ -40,10 +40,10 @@ class OrdersReposImpl implements OrdersRepo {
       required String userId}) async {
     try {
       await _dataBaseService.updateData(
-        mainPath: BackendEndpoints.orderPath,
+        mainPath: AppKeys.orderPath,
         mainDocumentId: userId,
         subDocumentId: orderId,
-        subPath: BackendEndpoints.userOrders,
+        subPath: AppKeys.userOrders,
         data: {
           "status.$key": convertDateTimeToString(),
         },
