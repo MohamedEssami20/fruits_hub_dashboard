@@ -5,10 +5,12 @@ import 'package:fruits_hub_dashboard/core/services/data_base_service.dart';
 import 'package:fruits_hub_dashboard/core/services/firestore_service.dart';
 import 'package:fruits_hub_dashboard/core/services/storage_service.dart';
 import 'package:fruits_hub_dashboard/core/services/supabase_storage_service.dart';
+import 'package:fruits_hub_dashboard/feature/add_advertising/domain/repos/addvertising_repos.dart';
 import 'package:fruits_hub_dashboard/feature/orders/domain/repos/orders_repo.dart';
 import 'package:fruits_hub_dashboard/feature/products/domain/repos/products_repos.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../feature/add_advertising/data/repos/advertising_repos_impl.dart';
 import '../../feature/orders/data/repos_impl/orders_repos_impl.dart';
 import '../../feature/products/data/repos_impl/prodcuts_repos_impl.dart';
 import '../repos/images_repo_impl.dart';
@@ -41,5 +43,9 @@ class GetItService {
         dataBaseService: getIt.get<DataBaseService>(),
       ),
     );
+
+    getIt.registerSingleton<AddvertisingRepos>(AdvertisingReposImpl(
+      dataBaseService: getIt.get<DataBaseService>(),
+    ));
   }
 }

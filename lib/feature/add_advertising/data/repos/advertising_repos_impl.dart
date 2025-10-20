@@ -7,18 +7,20 @@ import 'package:fruits_hub_dashboard/core/services/data_base_service.dart';
 import 'package:fruits_hub_dashboard/feature/add_advertising/data/models/add_avertising_input_model.dart';
 import 'package:fruits_hub_dashboard/feature/add_advertising/domain/repos/addvertising_repos.dart';
 
+import '../../domain/entities/add_advertising_inputs_entity.dart';
+
 class AdvertisingReposImpl implements AddvertisingRepos{
 
   final DataBaseService dataBaseService;
 
   AdvertisingReposImpl({required this.dataBaseService});
   @override
-  Future<Either<Failure, void>> addAdvertising(AddAdvertisingInputModel adsModel) async{
+  Future<Either<Failure, void>> addAdvertising(AddAdvertisingInputsEntity adsModel) async{
     try {
       await dataBaseService.addData(
-        documentId: adsModel.productId,
+        documentId: adsModel.id,
         path: "advertising",
-        data: adsModel.toJson(),
+        data: AddAdvertisingInputModel.fromProductEntity(adsModel).toJson(),
       );
       return right(null);
     } 

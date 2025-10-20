@@ -1,7 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_dashboard/feature/add_advertising/domain/entities/add_advertising_inputs_entity.dart';
+import 'package:fruits_hub_dashboard/feature/add_advertising/presentation/manager/cubit/add_advertising_cubit.dart';
 
+import '../../../../core/helper/func/generate_product_id.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 import '../../../../core/utils/widgets/custom_text_form_filed.dart';
 import '../../../../core/utils/widgets/is_featured_item.dart';
@@ -124,32 +128,35 @@ class _AddAdvertisingViewBodyState extends State<AddAdvertisingViewBody> {
             const SizedBox(height: 20),
             CustomButton(
               onPressed: () async {
-                // if (imageFile != null) {
-                //   if (_formKey.currentState!.validate()) {
-                //     _formKey.currentState!.save();
-                //     autovalidateMode = AutovalidateMode.disabled;
-                //     setState(() {});
-                //     AddProductInputEntity addProductInputEntity =
-                //         AddProductInputEntity(
-                //       id: generateProductId(),
-                //       name: name,
-                //       price: price,
-                //       code: code,
-                //       description: description,
-                //       image: imageFile!,
-                //       isFeatured: isFeatured,
-                //       isOraganic: isOraganic,
-                //       unitAmount: unitAmount,
-                //       expeireationMonths: expeireationMonths,
-                //       numberOfCalories: numberOfCalories,
-                //     );
-                //     await context.read<AddProductCubit>().addProduct(
-                //         addProductInputEntity: addProductInputEntity);
-                //   } else {
-                //     autovalidateMode = AutovalidateMode.always;
-                //     setState(() {});
-                //   }
-                // }
+                if (imageFile != null) {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    autovalidateMode = AutovalidateMode.disabled;
+                    setState(() {});
+                    AddAdvertisingInputsEntity advertisingInputsEntity =
+                        AddAdvertisingInputsEntity(
+                      id: generateProductId(),
+                      advName: advName,
+                      advDiscount: advDiscount,
+                      name: name,
+                      price: price,
+                      code: code,
+                      description: description,
+                      image: imageFile!,
+                      isFeatured: isFeatured,
+                      isOraganic: isOraganic,
+                      unitAmount: unitAmount,
+                      expeireationMonths: expeireationMonths,
+                      numberOfCalories: numberOfCalories,
+                    );
+                    await context.read<AddAdvertisingCubit>().addAdvertising(
+                          advertisingInputsEntity,
+                        );
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                }
               },
               title: "Add Product",
             ),
