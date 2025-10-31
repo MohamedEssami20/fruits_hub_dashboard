@@ -17,9 +17,11 @@ class AddProductInputModel {
   final num ratingCount;
   final int unitAmount;
   final int sellingCount;
+  final String productType;
   AddProductInputModel(
       {required this.productId,
       required this.name,
+      required this.productType,
       required this.code,
       required this.price,
       required this.image,
@@ -39,6 +41,7 @@ class AddProductInputModel {
     return AddProductInputModel(
         productId: addProductInputEntity.id,
         name: addProductInputEntity.name,
+        productType: addProductInputEntity.productType,
         code: addProductInputEntity.code,
         price: addProductInputEntity.price,
         image: addProductInputEntity.image,
@@ -59,6 +62,7 @@ class AddProductInputModel {
       "name": name,
       "code": code,
       "price": price,
+      "productType": productType,
       "iamgeUrl": iamgeUrl,
       "isFeatured": isFeatured,
       "description": description,

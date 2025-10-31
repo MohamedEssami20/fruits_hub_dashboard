@@ -17,6 +17,8 @@ ProductEntity getInstance() {
     avgRating: 4.5,
     ratingCount: 10,
     unitAmount: 1,
+    sellingCount: 0,
+    productType: 'Fruits',
   );
 }
 

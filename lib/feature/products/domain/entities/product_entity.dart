@@ -7,6 +7,7 @@ class ProductEntity extends Equatable {
   final String id;
   final String name;
   final String code;
+  final String productType;
   final num price;
   final File image;
    bool? isFeatured;
@@ -37,6 +38,7 @@ class ProductEntity extends Equatable {
     required this.ratingCount,
     this.sellingCount = 0,
     required this.unitAmount,
+    required this.productType,
   });
 
   @override

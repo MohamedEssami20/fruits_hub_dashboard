@@ -148,6 +148,7 @@ class _EditProductViewBodyState extends State<EditProductViewBody> {
                       unitAmount: unitAmount,
                       expeireationMonths: expeireationMonths,
                       numberOfCalories: numberOfCalories,
+                      productType: widget.productEntity.productType,
                     );
                     await context.read<EditProductCubit>().editProduct(
                         addProductInputEntity: addProductInputEntity);

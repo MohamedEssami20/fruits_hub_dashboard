@@ -6,6 +6,7 @@ class ProductModel {
   final String productId;
   final String name;
   final String code;
+  final String productType;
   final num price;
   final File image;
   final bool isFeatured;
@@ -31,6 +32,7 @@ class ProductModel {
       required this.avgRating,
       required this.ratingCount,
       required this.unitAmount,
+      required this.productType,
       this.sellingCount = 0,
       this.iamgeUrl});
 
@@ -38,6 +40,7 @@ class ProductModel {
     return ProductModel(
       productId: json["productId"],
       image: File(json["iamgeUrl"]),
+      productType: json["productType"],
       name: json["name"],
       code: json["code"],
       price: json["price"],
@@ -58,6 +61,7 @@ class ProductModel {
     return ProductModel(
       productId: product.id,
       image: product.image,
+      productType: product.productType,
       name: product.name,
       code: product.code,
       price: product.price,
@@ -79,6 +83,7 @@ class ProductModel {
       id: productId,
       image: image,
       name: name,
+      productType: productType,
       code: code,
       price: price,
       iamgeUrl: iamgeUrl,

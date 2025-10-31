@@ -1,7 +1,9 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_dashboard/core/constant/back_end_endpoints.dart/backend_end_point.dart';
 import 'package:fruits_hub_dashboard/core/helper/func/generate_product_id.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_button.dart';
 import 'package:fruits_hub_dashboard/core/utils/widgets/custom_text_form_filed.dart';
@@ -11,6 +13,7 @@ import 'package:fruits_hub_dashboard/feature/add_product/presentation/manager/cu
 import 'package:fruits_hub_dashboard/feature/add_product/presentation/views/widgets/image_field.dart';
 
 import '../../domain/entities/add_product_input_entity.dart';
+import 'choose_product_type.dart';
 
 class AddProductViewBody extends StatefulWidget {
   const AddProductViewBody({super.key});
@@ -28,6 +31,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
   late bool isOraganic = false;
   late int expeireationMonths, numberOfCalories, unitAmount;
   File? imageFile;
+  String productType = BackendEndPoint.banana;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -44,6 +48,15 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               },
               hintText: "product name",
               textInputType: TextInputType.text,
+            ),
+            const SizedBox(height: 20),
+            ChosseProductType(
+              value: productType,
+              onchanged: (value) {
+                setState(() {
+                  productType = value!;
+                });
+              },
             ),
             const SizedBox(height: 20),
             CustomTextFormFiled(
@@ -129,6 +142,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       unitAmount: unitAmount,
                       expeireationMonths: expeireationMonths,
                       numberOfCalories: numberOfCalories,
+                      productType: productType,
                     );
                     await context.read<AddProductCubit>().addProduct(
                         addProductInputEntity: addProductInputEntity);

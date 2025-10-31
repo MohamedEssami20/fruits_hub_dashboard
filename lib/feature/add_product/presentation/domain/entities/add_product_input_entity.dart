@@ -15,6 +15,7 @@ class AddProductInputEntity {
   final num avgRating;
   final num ratingCount;
   final int unitAmount;
+  final String productType;
   AddProductInputEntity({
     required this.id,
     required this.name,
@@ -30,5 +31,6 @@ class AddProductInputEntity {
     this.avgRating = 0.0,
     this.ratingCount = 0,
     required this.unitAmount,
+    required this.productType,
   });
 }
